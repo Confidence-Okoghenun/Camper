@@ -1,0 +1,24 @@
+{
+  "name": "camper",
+  "version": "1.0.0",
+  "description": "a web app to help you find the right camp grounds",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Confidence-Okoghenun/Camper.git"
+  },
+  "author": "Confidence Okoghenun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Confidence-Okoghenun/Camper/issues"
+  },
+  "homepage": "https://github.com/Confidence-Okoghenun/Camper#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}
