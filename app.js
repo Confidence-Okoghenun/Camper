@@ -12,13 +12,25 @@ app.get('/', (req, res) => {
 
 let campgrounds = [
   {name: 'Salmon Creek',
-  image: 'https://image1.com'},
+  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
   {name: 'Montana Creek',
-  image: 'https://image2.com'},
+  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
   {name: 'Snake Island',
-  image: 'https://image3.com'},
+  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
+  {name: 'Salmon Creek',
+  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
+  {name: 'Montana Creek',
+  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
+  {name: 'Snake Island',
+  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
+  {name: 'Salmon Creek',
+  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
+  {name: 'Montana Creek',
+  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
+  {name: 'Snake Island',
+  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
   {name: 'Banana Island',
-  image: 'https://image4.com'}
+  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'}
 ]
 app.get('/campgrounds', (req, res) => {
   res.render('campgrounds', {campgrounds: campgrounds});
