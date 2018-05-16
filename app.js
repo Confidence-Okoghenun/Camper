@@ -10,18 +10,30 @@ app.get('/', (req, res) => {
   res.render('landing');
 });
 
+let campgrounds = [
+  {name: 'Salmon Creek',
+  image: 'https://image1.com'},
+  {name: 'Montana Creek',
+  image: 'https://image2.com'},
+  {name: 'Snake Island',
+  image: 'https://image3.com'},
+  {name: 'Banana Island',
+  image: 'https://image4.com'}
+]
 app.get('/campgrounds', (req, res) => {
-  let campgrounds = [
-    {name: 'Salmon Creek',
-    image: 'https://image.com'},
-    {name: 'Montana Creek',
-    image: 'https://image.com'},
-    {name: 'Snake Island',
-    image: 'https://image.com'},
-    {name: 'Banana Island',
-    image: 'https://image.com'}
-  ]
   res.render('campgrounds', {campgrounds: campgrounds});
+});
+
+app.post('/campgrounds', (req, res) => {
+  let newCamp = {};
+  newCamp.name = req.body.name;
+  newCamp.image = req.body.image;
+  campgrounds.push(newCamp);
+  res.redirect('/campgrounds');
+});
+
+app.get('/campgrounds/new', (req, res) => {
+  res.render('new')
 });
 
 app.get('*', (req, res) => {
