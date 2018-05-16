@@ -1,10 +1,14 @@
 <% include partials/header %>
 <h1>Create a new Campground</h1>
-<a href="/">Home</a>
 <form action="/campgrounds" method="POST">
-<input type="text" name="name" placeholder="camp name">
-<input type="text" name="image" placeholder="camp image url">
-<button type="submit">Submit</button>
+  <div class="form-group">
+    <input class="form-control" type="text" name="name" placeholder="camp name">
+  </div>
+    <div class="form-group">
+    <input class="form-control" type="text" name="image" placeholder="camp image url">
+  </div>
+    <div class="form-group">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+  </div>
 </form>
-<a href="/campgrounds">back to Campgrounds</a>
 <% include partials/footer %>
