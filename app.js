@@ -1,6 +1,8 @@
 let app = require('express')(),
-  bodyParser = require('body-parser');
+  bodyParser = require('body-parser'),
+  mongoose = require('mongoose');
 
+mongoose.connect('mongodb://localhost/camper');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -10,38 +12,43 @@ app.get('/', (req, res) => {
   res.render('landing');
 });
 
-let campgrounds = [
-  {name: 'Salmon Creek',
-  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
-  {name: 'Montana Creek',
-  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
-  {name: 'Snake Island',
-  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
-  {name: 'Salmon Creek',
-  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
-  {name: 'Montana Creek',
-  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
-  {name: 'Snake Island',
-  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
-  {name: 'Salmon Creek',
-  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
-  {name: 'Montana Creek',
-  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
-  {name: 'Snake Island',
-  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'},
-  {name: 'Banana Island',
-  image: 'https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144393f5c17ca3edb2_340.jpg'}
-]
+let campgroundSchema = new mongoose.Schema({
+  name: String,
+  image: String
+});
+
+let Campground = mongoose.model('Campground', campgroundSchema);
+// Campground.create({
+//       name: 'Montana Creek',
+//       image: 'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1c80f31bb4040015d51db663252fbd30&auto=format&fit=crop&w=500&q=60'
+//     }, (err, camp) => {
+//   if(err) console.log('***AN ERROR HAS OCCURED!***', err);
+//   else console.log(camp);
+// });
+
 app.get('/campgrounds', (req, res) => {
-  res.render('campgrounds', {campgrounds: campgrounds});
+  Campground.find({}, (err, allCampgrounds) => {
+    if (err) console.log('***AN ERROR HAS OCCURED!***', err);
+    else {
+      res.render('campgrounds', {
+        campgrounds: allCampgrounds
+      });
+      console.log('CAMPGROUNDS HAS BEEN RENDERED!');
+    }
+  })
 });
 
 app.post('/campgrounds', (req, res) => {
-  let newCamp = {};
-  newCamp.name = req.body.name;
-  newCamp.image = req.body.image;
-  campgrounds.push(newCamp);
-  res.redirect('/campgrounds');
+  Campground.create({
+    name: req.body.name,
+    image: req.body.image
+  }, (err, newCampground) => {
+    if (err) console.log('***AN ERROR HAS OCCURED!***', err);
+    else {
+      console.log('A NEW CAMPGROUND HAS BEEN SUCESSFULLY CREATED!', newCampground)
+      res.redirect('/campgrounds');
+    }
+  })
 });
 
 app.get('/campgrounds/new', (req, res) => {
