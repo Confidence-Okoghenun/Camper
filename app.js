@@ -14,7 +14,8 @@ app.get('/', (req, res) => {
 
 let campgroundSchema = new mongoose.Schema({
   name: String,
-  image: String
+  image: String,
+  description: String
 });
 
 let Campground = mongoose.model('Campground', campgroundSchema);
@@ -30,7 +31,7 @@ app.get('/campgrounds', (req, res) => {
   Campground.find({}, (err, allCampgrounds) => {
     if (err) console.log('***AN ERROR HAS OCCURED!***', err);
     else {
-      res.render('campgrounds', {
+      res.render('index', {
         campgrounds: allCampgrounds
       });
       console.log('CAMPGROUNDS HAS BEEN RENDERED!');
@@ -41,7 +42,8 @@ app.get('/campgrounds', (req, res) => {
 app.post('/campgrounds', (req, res) => {
   Campground.create({
     name: req.body.name,
-    image: req.body.image
+    image: req.body.image,
+    description: req.body.description
   }, (err, newCampground) => {
     if (err) console.log('***AN ERROR HAS OCCURED!***', err);
     else {
@@ -54,6 +56,15 @@ app.post('/campgrounds', (req, res) => {
 app.get('/campgrounds/new', (req, res) => {
   res.render('new')
 });
+
+app.get('/campgrounds/:id', (req, res) => {
+  Campground.findById(req.params.id, (err, foundCampground) => {
+    if(err) console.log('ERROR WITH CAMP SHOW');
+    else {
+      res.render('show', {campground: foundCampground});
+    }
+  })
+})
 
 app.get('*', (req, res) => {
   res.send('The page you are looking for does not exist');
